@@ -25,13 +25,7 @@ contract NFTCollection is ERC721Enumerable, Ownable {
         return newItemId;
     }
 
-    function _baseURI()
-        internal
-        view
-        override
-        onlyOwner
-        returns (string memory)
-    {
+    function _baseURI() internal view override returns (string memory) {
         return baseTokenURI;
     }
 
