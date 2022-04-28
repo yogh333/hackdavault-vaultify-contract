@@ -40,4 +40,21 @@ contract NFTCollection is ERC721Enumerable, Ownable {
     function setBaseURI(string memory _baseTokenURI) public onlyOwner {
         baseTokenURI = _baseTokenURI;
     }
+
+    /// @notice retrieve all tokenIDs owned by an address
+    /// @param _owner address
+    /// @return array of tokenIDs owned by address
+    function walletOfOwner(address _owner)
+        public
+        view
+        returns (uint256[] memory)
+    {
+        uint256 tokenCount = balanceOf(_owner);
+
+        uint256[] memory tokensId = new uint256[](tokenCount);
+        for (uint256 i; i < tokenCount; i++) {
+            tokensId[i] = tokenOfOwnerByIndex(_owner, i);
+        }
+        return tokensId;
+    }
 }

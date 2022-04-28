@@ -36,4 +36,15 @@ contract NFTCollectionTest is Test {
         console.log(collection.tokenURI(1));
         assertEq(collection.tokenURI(1), "http://ipfs.com/1");
     }
+
+    function testWalletOfOwner() public {
+        address dest = address(0xC083c81F2F15Fd14aCCa5BD699f18E324c05e4Fb);
+        collection.mint(dest);
+        collection.mint(dest);
+        collection.mint(dest);
+        uint256[] memory tokenIDs = collection.walletOfOwner(dest);
+        assertEq(tokenIDs[0], 1);
+        assertEq(tokenIDs[1], 2);
+        assertEq(tokenIDs[2], 3);
+    }
 }
