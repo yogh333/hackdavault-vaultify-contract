@@ -13,7 +13,7 @@ contract NFTCollectionTest is Test {
 
     function testMintAsOwner() public {
         assertEq(collection.balanceOf(msg.sender), 0);
-        collection.mintTo(msg.sender);
+        collection.mint(msg.sender);
         assertEq(collection.balanceOf(msg.sender), 1);
     }
 
@@ -26,13 +26,13 @@ contract NFTCollectionTest is Test {
     }
 
     function testGetTokenURI() public {
-        collection.mintTo(msg.sender);
+        collection.mint(msg.sender);
         assertEq(collection.tokenURI(1), "http://db.com/1");
     }
 
     function testSetBaseURI() public {
         collection.setBaseURI("http://ipfs.com/");
-        collection.mintTo(msg.sender);
+        collection.mint(msg.sender);
         console.log(collection.tokenURI(1));
         assertEq(collection.tokenURI(1), "http://ipfs.com/1");
     }

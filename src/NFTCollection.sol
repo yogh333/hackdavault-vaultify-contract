@@ -17,16 +17,26 @@ contract NFTCollection is ERC721Enumerable, Ownable {
         baseTokenURI = _baseTokenURI;
     }
 
-    function mintTo(address recipient) public onlyOwner returns (uint256) {
+    /// @notice mint a NFT
+    /// @param recipient destination address
+    function mint(address recipient) public onlyOwner returns (uint256) {
         uint256 newItemId = ++currentTokenId;
         _safeMint(recipient, newItemId);
         return newItemId;
     }
 
-    function _baseURI() internal view override returns (string memory) {
+    function _baseURI()
+        internal
+        view
+        override
+        onlyOwner
+        returns (string memory)
+    {
         return baseTokenURI;
     }
 
+    /// @notice set a new baseTokenURI
+    /// @param _baseTokenURI the new base token URI
     function setBaseURI(string memory _baseTokenURI) public onlyOwner {
         baseTokenURI = _baseTokenURI;
     }
